@@ -1,6 +1,6 @@
 -- Agentic lending lab: setup for a Snowflake trial account
 --
--- Open this file in the snowflake-agentic-lending-lab workspace you created
+-- Open this file in the sfguide-build-a-multi-agent-lending-workflow workspace you created
 -- from the lab's GitHub repository, then choose Run All. It takes about a
 -- minute.
 --
@@ -643,7 +643,7 @@ CREATE OR REPLACE SEMANTIC VIEW LENDING.LOANS.APPLICATION_ANALYTICS
 
 COPY FILES
     INTO @LENDING.LOANS.LAB_FILES
-    FROM 'snow://workspace/USER$.PUBLIC."snowflake-agentic-lending-lab"/versions/live/data/lab_files/';
+    FROM 'snow://workspace/USER$.PUBLIC."sfguide-build-a-multi-agent-lending-workflow"/versions/live/data/lab_files/';
 
 /* Without REFRESH the directory table stays empty. */
 ALTER STAGE LENDING.LOANS.LAB_FILES REFRESH;
@@ -673,7 +673,7 @@ CREATE STAGE LENDING.LOANS.PARSED_TEXT
 
 COPY FILES
     INTO @LENDING.LOANS.PARSED_TEXT
-    FROM 'snow://workspace/USER$.PUBLIC."snowflake-agentic-lending-lab"/versions/live/data/document_text/';
+    FROM 'snow://workspace/USER$.PUBLIC."sfguide-build-a-multi-agent-lending-workflow"/versions/live/data/document_text/';
 
 COPY INTO LENDING.LOANS.DOCUMENT_TEXT (FILE_NAME, APPLICANT_ID, DOC_TYPE, DOC_TEXT)
 FROM (SELECT $1:FILE_NAME, $1:APPLICANT_ID, $1:DOC_TYPE, $1:DOC_TEXT
@@ -831,7 +831,7 @@ CREATE STAGE
 
 COPY FILES
     INTO @LENDING.LOANS.LAB_STAGE/
-    FROM 'snow://workspace/USER$.PUBLIC."snowflake-agentic-lending-lab"/versions/live/data/eval/';
+    FROM 'snow://workspace/USER$.PUBLIC."sfguide-build-a-multi-agent-lending-workflow"/versions/live/data/eval/';
 
 ALTER STAGE LENDING.LOANS.LAB_STAGE REFRESH;
 ---------------------------------
